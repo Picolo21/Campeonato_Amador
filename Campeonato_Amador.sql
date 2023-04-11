@@ -35,22 +35,17 @@ CREATE TABLE Partida
 )
 GO
 
+-- Inserindo os Times
+
 INSERT INTO [Time]
     (Nome, Apelido, Data_Criacao)
 VALUES
     ('São Paulo Futebol Clube', 'São Paulo F.C.', '1930-01-25'),
-    -- 25/01/1930
     ('Sport Club Corinthians Paulista', 'Corinthians', '1910-09-01'),
-    -- 01/09/1910
     ('Sociedade Esportiva Palmeiras', 'Palmeiras', '1914-08-26'),
-    -- 26/08/1914
     ('Santos Futebol Clube', 'Santos F.C.', '1912-04-14'),
-    -- 14/04/1912
-    ('Associação Portuguesa de Desportos', 'Portuguesa', '1920-08-14') -- 14/08/1920
+    ('Associação Portuguesa de Desportos', 'Portuguesa', '1920-08-14')
 GO
-
-SELECT *
-FROM [Time]
 
 -- Rodada 1 - Santos
 
@@ -62,7 +57,6 @@ INSERT INTO Partida
 VALUES('Santos Futebol Clube', 4, 'Sociedade Esportiva Palmeiras', 0)
 INSERT INTO Partida
 VALUES('Santos Futebol Clube', 3, 'Associação Portuguesa de Desportos', 3)
-
 
 -- Rodada 2 - São Paulo
 
@@ -108,13 +102,42 @@ VALUES('Associação Portuguesa de Desportos', 2, 'São Paulo Futebol Clube', 5)
 INSERT INTO Partida
 VALUES('Associação Portuguesa de Desportos', 1, 'Sport Club Corinthians Paulista', 1)
 
-SELECT *
-FROM Partida
 SELECT Apelido AS [Time], Pontos, Partidas_Jogadas AS [Partidas Jogadas], Vitorias,
     Empates, Derrotas, Gols_Marcados AS [Gols Marcados], Gols_Sofridos AS [Gols Sofridos], Saldo_Gols AS [Saldo de Gols]
 FROM [Time]
 
--- DELETE FROM Partida
--- DELETE FROM [Time]
+-- Mostra o time que foi campeão do Campeonato Amador
+EXEC.MostrarCampeao
+GO
 
+-- Mostra os 5 primeiros times do Campeonato Amador
+EXEC.Classificacao
+GO
 
+-- Mostra o time que fez mais gols
+EXEC.MaisGolsFeitos
+GO
+
+-- Mostra o time que levou mais gols
+EXEC.MaisGolsSofridos
+GO
+
+-- Mostra o maior placar de um jogo do Campeonato Amador
+EXEC.MaiorPlacar
+GO
+
+-- Mostra qual o jogo que cada time fez mais gols
+EXEC.JogoComMaisGols 'Associação Portuguesa de Desportos'
+GO
+
+EXEC.JogoComMaisGols 'Sociedade Esportiva Palmeiras'
+GO
+
+EXEC.JogoComMaisGols 'Santos Futebol Clube'
+GO
+
+EXEC.JogoComMaisGols 'São Paulo Futebol Clube'
+GO
+
+EXEC.JogoComMaisGols 'Sport Club Corinthians Paulista'
+GO
